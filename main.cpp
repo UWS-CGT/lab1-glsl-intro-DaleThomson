@@ -31,10 +31,12 @@ void exitFatalError(char *message)
 // Data would normally be read from files
 GLfloat vertices[] = {	-1.0f,0.0f,0.0f,
 						0.0f,1.0f,0.0f,
-						0.0f,0.0f,0.0f, };
+						0.0f,0.0f,0.0f,
+						-1.0f, 0.0f, 0.0f};
 GLfloat colours[] = {	1.0f, 0.0f, 0.0f,
 						0.0f, 1.0f, 0.0f,
-						0.0f, 0.0f, 1.0f };
+						0.0f, 0.0f, 1.0f,
+						1.0f, 0.0f, 0.0f};
 GLfloat vertices2[] = {	0.0f,0.0f,0.0f,
 						0.0f,-1.0f,0.0f,
 						1.0f,0.0f,0.0f };
@@ -185,10 +187,10 @@ void draw(SDL_Window * window) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glBindVertexArray(meshObjects[0]);	// Bind mesh VAO
-	glDrawArrays(GL_TRIANGLES, 0, 3);	// draw 3 vertices (one triangle)
+	glDrawArrays(GL_TRIANGLES, 0, 6);	// draw 3 vertices (one triangle)
 	
 	glBindVertexArray(meshObjects[1]);	// Bind mesh VAO
-	glDrawArrays(GL_TRIANGLES, 0, 3);	// draw 3 vertices (one triangle)
+	glDrawArrays(GL_TRIANGLES, 0, 6);	// draw 3 vertices (one triangle)
 
 	// These are deprecated functions. If a core profile has been correctly 
 	// created, these commands should compile, but wont render anything
@@ -216,13 +218,13 @@ void init(void) {
 	glGenBuffers(1, &VBOarray[0]);
 	// VBO for vertex data
 	glBindBuffer(GL_ARRAY_BUFFER, VBOarray[0]);
-	glBufferData(GL_ARRAY_BUFFER, 3*3*sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 18*sizeof(GLfloat), vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer((GLuint)RT3D_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0); 
 	glEnableVertexAttribArray(RT3D_VERTEX);
 	// VBO for colour data
 	glGenBuffers(1, &VBOarray[1]);
 	glBindBuffer(GL_ARRAY_BUFFER, VBOarray[1]);
-	glBufferData(GL_ARRAY_BUFFER, 3*3*sizeof(GLfloat), colours, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 18*sizeof(GLfloat), colours, GL_STATIC_DRAW);
 	glVertexAttribPointer((GLuint)RT3D_COLOUR, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(RT3D_COLOUR);
 
@@ -232,7 +234,7 @@ void init(void) {
 	// VBO for vertex data
 	glGenBuffers(1, &VBOarray[2]);
 	glBindBuffer(GL_ARRAY_BUFFER, VBOarray[2]);
-	glBufferData(GL_ARRAY_BUFFER, 3*3*sizeof(GLfloat), vertices2, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 18*sizeof(GLfloat), vertices2, GL_STATIC_DRAW);
 	glVertexAttribPointer((GLuint)RT3D_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, 0); 
 	glEnableVertexAttribArray(RT3D_VERTEX);
 	glBindVertexArray(meshObjects[0]);
